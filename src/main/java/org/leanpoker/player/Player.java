@@ -8,26 +8,17 @@ import org.leanpoker.player.model.Card;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class Player {
 
-    static final String VERSION = "2";
+    static final String VERSION = "3";
 
     public static int betRequest(JsonElement request) {
         Gson gson = new Gson();
         Bet bet = gson.fromJson(request, Bet.class);
 
-        /*
-        JsonArray communityCards = request.getAsJsonObject().getAsJsonArray("community_cards");
-        int currentBuyIn = request.getAsJsonObject().getAsJsonPrimitive("current_buy_in").getAsInt();
-        int playerInAction = request.getAsJsonObject().getAsJsonPrimitive("in_action").getAsInt();
-        int playerBet = request.getAsJsonObject().getAsJsonArray("players").get(playerInAction)
-              .getAsJsonObject().getAsJsonPrimitive("bet").getAsInt();
-
-        int smallBlind = request.getAsJsonObject().getAsJsonPrimitive("small_blind").getAsInt();
-*/
-
+        // ermittle unseren Spieler
+        org.leanpoker.player.model.Player myPlayer = getMyPlayer(bet);
         int bigBlind = bet.getSmall_blind() * 2;
         int minimalBet = bet.getCurrent_buy_in() - bet.getPlayers()[bet.getIn_action()].getBet();
 
@@ -37,6 +28,10 @@ public class Player {
         if (communityCards.size() == 0) {
             if(bigBlind == bet.getCurrent_buy_in()){
                 return minimalBet;
+            }
+            //Gehe in der ersten Runde all in, wenn Paar auf der Hand
+            if(checkCardsOnHand(myPlayer) > 91){
+                return myPlayer.getStack();
             }
         }
         //Zweite Runde
@@ -58,5 +53,49 @@ public class Player {
     }
 
     public static void showdown(JsonElement game) {
+    }
+
+    public static int checkCardsOnHand(org.leanpoker.player.model.Player player){
+        Card firstCard = player.getHole_cards()[0];
+        Card secondCard = player.getHole_cards()[1];
+
+        //Überprüfen ob paar auf der Hand
+        if(firstCard.getRank().equalsIgnoreCase(secondCard.getRank())){
+            if(getCardNumber(firstCard) > 0 && getCardNumber(secondCard) > 0){
+                return 95;
+            }
+            return 100;
+        }
+
+        //Überprüfe ob wir hoche Karten auf der Hand haben
+        if(cardIsHigh(firstCard) && cardIsHigh(secondCard)){
+            if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+                return 90;
+            }
+            return 85;
+        }
+
+        return 0;
+    }
+
+    public static org.leanpoker.player.model.Player getMyPlayer(Bet bet){
+        return bet.getPlayers()[bet.getIn_action()];
+    }
+
+    public static boolean cardIsHigh(Card card){
+        try{
+            Integer.parseInt(card.getRank());
+            return false;
+        } catch (Exception e){
+            return true;
+        }
+    }
+
+    private static int getCardNumber(Card card){
+        try{
+            return Integer.parseInt(card.getRank());
+        } catch (Exception e){
+            return 0;
+        }
     }
 }
