@@ -1,7 +1,6 @@
 package org.leanpoker.player;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import org.leanpoker.player.model.Bet;
 import org.leanpoker.player.model.Card;
