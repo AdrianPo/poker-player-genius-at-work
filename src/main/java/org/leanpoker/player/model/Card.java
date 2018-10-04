@@ -2,14 +2,14 @@ package org.leanpoker.player.model;
 
 public class Card {
 
-   private int rank;
+   private String rank;
    private String suit;
 
-   public int getRank() {
+   public String getRank() {
       return rank;
    }
 
-   public void setRank(int rank) {
+   public void setRank(String rank) {
       this.rank = rank;
    }
 
