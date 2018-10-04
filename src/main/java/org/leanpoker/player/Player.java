@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Player {
 
-    static final String VERSION = "3";
+    static final String VERSION = "4";
 
     public static int betRequest(JsonElement request) {
         Gson gson = new Gson();
@@ -19,6 +19,7 @@ public class Player {
 
         // ermittle unseren Spieler
         org.leanpoker.player.model.Player myPlayer = getMyPlayer(bet);
+        int cardIndex = checkCardsOnHand(myPlayer);
         int bigBlind = bet.getSmall_blind() * 2;
         int minimalBet = bet.getCurrent_buy_in() - bet.getPlayers()[bet.getIn_action()].getBet();
 
@@ -30,8 +31,13 @@ public class Player {
                 return minimalBet;
             }
             //Gehe in der ersten Runde all in, wenn Paar auf der Hand
-            if(checkCardsOnHand(myPlayer) > 91){
+            if(cardIndex > 91){
                 return myPlayer.getStack();
+            }
+            if(cardIndex >= 80){
+                if((minimalBet * 4) < myPlayer.getStack()){
+                    return minimalBet * 4;
+                }
             }
         }
         //Zweite Runde
