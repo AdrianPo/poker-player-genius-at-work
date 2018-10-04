@@ -72,39 +72,42 @@ public class Player {
     }
 
     public static int checkCardsOnHand(org.leanpoker.player.model.Player player){
-        Card firstCard = player.getHole_cards()[0];
-        Card secondCard = player.getHole_cards()[1];
+        if(player.getHole_cards().length == 2){
+            Card firstCard = player.getHole_cards()[0];
+            Card secondCard = player.getHole_cards()[1];
 
-        //Überprüfen ob paar auf der Hand
-        if(firstCard.getRank().equalsIgnoreCase(secondCard.getRank())){
-            if(getCardNumber(firstCard) > 0 && getCardNumber(secondCard) > 0){
-                return 95;
+            //Überprüfen ob paar auf der Hand
+            if(firstCard.getRank().equalsIgnoreCase(secondCard.getRank())){
+                if(getCardNumber(firstCard) > 0 && getCardNumber(secondCard) > 0){
+                    return 95;
+                }
+                return 100;
             }
-            return 100;
-        }
 
-        //Überprüfe ob wir hoche Karten auf der Hand haben
-        if(cardIsHigh(firstCard) && cardIsHigh(secondCard)){
+            //Überprüfe ob wir hoche Karten auf der Hand haben
+            if(cardIsHigh(firstCard) && cardIsHigh(secondCard)){
+                if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+                    return 90;
+                }
+                return 85;
+            }
+
+            //Überprüfe ob wir mind. eine hoche Karten auf der Hand haben
+            if(cardIsHigh(firstCard) || cardIsHigh(secondCard)){
+                if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+                    return 80;
+                }
+                return 75;
+            }
+
+            //Überprüfe ob wir dieselbe farbe der Karten auf der Hand haben
             if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
-                return 90;
+                return 70;
             }
-            return 85;
-        }
 
-        //Überprüfe ob wir mind. eine hoche Karten auf der Hand haben
-        if(cardIsHigh(firstCard) || cardIsHigh(secondCard)){
-            if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
-                return 80;
-            }
-            return 75;
+            return 60;
         }
-
-        //Überprüfe ob wir dieselbe farbe der Karten auf der Hand haben
-        if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
-            return 70;
-        }
-
-        return 60;
+        return 0;
     }
 
     public static org.leanpoker.player.model.Player getMyPlayer(Bet bet){
