@@ -28,7 +28,7 @@ public class Player {
         LOGGER.info("Load Community Cards");
 
         //Erste Runde
-        List<Card> communityCards = Arrays.asList(bet.getCommunityCards());
+        List<Card> communityCards = Arrays.asList(bet.getCommunity_cards());
 
         LOGGER.info("Card Index: " + cardIndex);
 
@@ -72,6 +72,8 @@ public class Player {
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
+           int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
+
             if(bigBlind == bet.getCurrent_buy_in()){
                 return minimalBet;
             }

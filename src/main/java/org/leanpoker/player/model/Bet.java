@@ -10,7 +10,7 @@ public class Bet {
    private int orbits;
    private int in_action;
    private int dealer;
-   private Card[] communityCards = new Card[]{};
+   private Card[] community_cards = new Card[]{};
    private int current_buy_in;
    private int pot;
    private Player[] players = new Player[]{};
@@ -79,12 +79,12 @@ public class Bet {
       this.dealer = dealer;
    }
 
-   public Card[] getCommunityCards() {
-      return communityCards;
+   public Card[] getCommunity_cards() {
+      return community_cards;
    }
 
-   public void setCommunityCards(Card[] communityCards) {
-      this.communityCards = communityCards;
+   public void setCommunity_cards(Card[] community_cards) {
+      this.community_cards = community_cards;
    }
 
    public int getCurrent_buy_in() {
