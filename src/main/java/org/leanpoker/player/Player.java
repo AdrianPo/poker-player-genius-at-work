@@ -79,7 +79,12 @@ public class Player {
 
            int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
-           if (countMatches == 1) {
+           if (countMatches == 0) {
+              if (cardIndex < 90 && cardIndex >= 70) {
+                 return bet.getCurrent_buy_in();
+              }
+           }
+           else if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
                  return bet.getCurrent_buy_in();
               }
@@ -92,7 +97,12 @@ public class Player {
         if (communityCards.size() == 4) {
            int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
-           if (countMatches == 1) {
+           if (countMatches == 0) {
+              if (cardIndex < 90 && cardIndex >= 70) {
+                 return bet.getCurrent_buy_in();
+              }
+           }
+           else if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
                  return bet.getCurrent_buy_in();
               }
