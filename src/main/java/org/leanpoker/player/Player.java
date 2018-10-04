@@ -94,9 +94,9 @@ public class Player {
                return bet.getCurrent_buy_in();
             }
          } else if (countMatches == 1) {
+            return raise(myPlayer, bet, minimalBet, 20);
+         } else if (countMatches == 2) {
             return raise(myPlayer, bet, minimalBet, 40);
-         } else {
-            return raise(myPlayer, bet, minimalBet, 80);
          }
       }
       //Dritte Runde
@@ -118,9 +118,9 @@ public class Player {
                return bet.getCurrent_buy_in();
             }
          } else if (countMatches == 1) {
+            return raise(myPlayer, bet, minimalBet, 20);
+         } else if (countMatches == 2) {
             return raise(myPlayer, bet, minimalBet, 40);
-         } else {
-            return raise(myPlayer, bet, minimalBet, 80);
          }
       }
       //Vierte Runde
@@ -138,7 +138,7 @@ public class Player {
          }
 
          if (countMatches == 1) {
-            return raise(myPlayer, bet, minimalBet, 40);
+            return raise(myPlayer, bet, minimalBet, 20);
          } else if (countMatches == 2) {
             return raise(myPlayer, bet, minimalBet, 80);
          }
