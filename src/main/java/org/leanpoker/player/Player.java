@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class Player {
 
-   static final String VERSION = "9";
+   static final String VERSION = "11";
 
    public final static Logger LOGGER = Logger.getAnonymousLogger();
 
@@ -219,6 +219,8 @@ public class Player {
          else {
             return bet.getCurrent_buy_in();
          }
+      } else if(myPlayer.getBet() > 0){
+         return myPlayer.getStack();
       }
 
       return 0;
