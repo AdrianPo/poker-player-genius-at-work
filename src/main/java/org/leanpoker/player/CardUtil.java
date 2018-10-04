@@ -43,4 +43,73 @@ public class CardUtil {
 
       return false;
    }
+
+   public static boolean hasTripleOrFour(List<Card> cardList, final Card firstCard, Card secondCard){
+      if(firstCard.getRank().equalsIgnoreCase(secondCard.getRank())){
+         for(Card card : cardList){
+            if(card.getRank().equalsIgnoreCase(firstCard.getRank())){
+               return true;
+            }
+         }
+      } else {
+         int firstCardCount = 0;
+         int secoundCardCount = 0;
+
+         for(Card card : cardList){
+            if(card.getRank().equalsIgnoreCase(firstCard.getRank())){
+               firstCardCount++;
+               if(firstCardCount == 2){
+                  return true;
+               }
+            }
+         }
+
+         for(Card card : cardList){
+            if(card.getRank().equalsIgnoreCase(secondCard.getRank())){
+               secoundCardCount++;
+               if(secoundCardCount == 2){
+                  return true;
+               }
+            }
+         }
+      }
+      return false;
+   }
+
+   public static int suitMatch(List<Card> cardList, final Card firstCard, Card secondCard){
+      int suitMatch = 1;
+
+      // gleiche Farbe auf der Hand
+      if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+         suitMatch += 1;
+         for(Card card : cardList){
+            if(card.getSuit().equalsIgnoreCase(firstCard.getSuit())){
+               suitMatch++;
+            }
+         }
+      } else {
+         int firstCardCount = 0;
+         int secoundCardCount = 0;
+
+         for(Card card : cardList){
+            if(card.getSuit().equalsIgnoreCase(firstCard.getSuit())){
+               firstCardCount++;
+            }
+         }
+
+         for(Card card : cardList){
+            if(card.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+               secoundCardCount++;
+            }
+         }
+
+         if(firstCardCount > secoundCardCount){
+            return suitMatch + firstCardCount;
+         } else {
+            return suitMatch + secoundCardCount;
+         }
+      }
+
+      return suitMatch;
+   }
 }
