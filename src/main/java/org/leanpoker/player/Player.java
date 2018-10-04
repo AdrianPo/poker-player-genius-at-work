@@ -96,7 +96,15 @@ public class Player {
               }
            }
            else if (countMatches == 2) {
-              return myPlayer.getStack();
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+
+                 if (myPlayer.getStack() >= (minimalBet + 40)) {
+                    return minimalBet + 40;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
+              }
            }
         }
         //Dritte Runde
@@ -120,7 +128,15 @@ public class Player {
               }
            }
            else if (countMatches == 2) {
-              return myPlayer.getStack();
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+
+                 if (myPlayer.getStack() >= (minimalBet + 40)) {
+                    return minimalBet + 40;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
+              }
            }
         }
         //Vierte Runde
@@ -139,7 +155,15 @@ public class Player {
               }
            }
            else if (countMatches == 2) {
-              return myPlayer.getStack();
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+
+                 if (myPlayer.getStack() >= (minimalBet + 80)) {
+                    return minimalBet + 80;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
+              }
            }
         }
 
