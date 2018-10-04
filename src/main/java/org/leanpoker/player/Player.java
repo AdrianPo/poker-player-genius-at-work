@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Player {
 
-    static final String VERSION = "5";
+    static final String VERSION = "6";
 
     public static int betRequest(JsonElement request) {
         Gson gson = new Gson();
@@ -49,6 +49,7 @@ public class Player {
                     return minimalBet * 2;
                 }
             }
+            return minimalBet;
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
