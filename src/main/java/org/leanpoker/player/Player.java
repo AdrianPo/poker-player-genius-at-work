@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Player {
 
-    static final String VERSION = "4";
+    static final String VERSION = "5";
 
     public static int betRequest(JsonElement request) {
         Gson gson = new Gson();
@@ -37,6 +37,16 @@ public class Player {
             if(cardIndex >= 80){
                 if((minimalBet * 4) < myPlayer.getStack()){
                     return minimalBet * 4;
+                }
+            }
+            if(cardIndex >= 70){
+                if((minimalBet * 3) < myPlayer.getStack()){
+                    return minimalBet * 3;
+                }
+            }
+            if(cardIndex >= 60){
+                if((minimalBet * 2) < myPlayer.getStack()){
+                    return minimalBet * 2;
                 }
             }
         }
@@ -81,7 +91,20 @@ public class Player {
             return 85;
         }
 
-        return 0;
+        //Überprüfe ob wir mind. eine hoche Karten auf der Hand haben
+        if(cardIsHigh(firstCard) || cardIsHigh(secondCard)){
+            if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+                return 80;
+            }
+            return 75;
+        }
+
+        //Überprüfe ob wir dieselbe farbe der Karten auf der Hand haben
+        if(firstCard.getSuit().equalsIgnoreCase(secondCard.getSuit())){
+            return 70;
+        }
+
+        return 60;
     }
 
     public static org.leanpoker.player.model.Player getMyPlayer(Bet bet){
