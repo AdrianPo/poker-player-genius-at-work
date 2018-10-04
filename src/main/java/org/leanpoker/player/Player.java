@@ -7,10 +7,13 @@ import org.leanpoker.player.model.Card;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Player {
 
-    static final String VERSION = "6";
+    static final String VERSION = "7";
+
+    public final static Logger LOGGER = Logger.getAnonymousLogger();
 
     public static int betRequest(JsonElement request) {
         Gson gson = new Gson();
@@ -22,14 +25,50 @@ public class Player {
         int bigBlind = bet.getSmall_blind() * 2;
         int minimalBet = bet.getCurrent_buy_in() - bet.getPlayers()[bet.getIn_action()].getBet();
 
+        LOGGER.info("Load Community Cards");
+
         //Erste Runde
         List<Card> communityCards = Arrays.asList(bet.getCommunityCards());
 
+        LOGGER.info("Card Index: " + cardIndex);
+
         if (communityCards.size() == 0) {
             if(bigBlind == bet.getCurrent_buy_in()){
+                LOGGER.info("Set Big Blind Round 0 " + cardIndex);
                 return minimalBet;
             }
-            return minimalBet;
+            //Gehe in der ersten Runde all in, wenn Paar auf der Hand
+            if(cardIndex > 91){
+                LOGGER.info("Go All-In Round 0 " + cardIndex);
+                return myPlayer.getStack();
+            }
+            if(cardIndex >= 80){
+                LOGGER.info("Go 80 Round 0 " + cardIndex);
+                if(minimalBet < myPlayer.getStack()){
+                    long currentValue = minimalBet / myPlayer.getStack();
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
+                }
+            }
+            if(cardIndex >= 70){
+                LOGGER.info("Go 70 Round 0 " + cardIndex);
+                if(minimalBet < myPlayer.getStack()){
+                    int currentValue = myPlayer.getStack() - minimalBet;
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
+                }
+            }
+            if(cardIndex >= 60){
+                LOGGER.info("Go 60 Round 0 " + cardIndex);
+                if(minimalBet < myPlayer.getStack()){
+                    int currentValue = myPlayer.getStack() - minimalBet;
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
+                }
+            }
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
