@@ -72,18 +72,40 @@ public class Player {
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
-           int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
             if(bigBlind == bet.getCurrent_buy_in()){
                 return minimalBet;
             }
+
+           int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
+
+           if (countMatches > 0) {
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+                 return bet.getCurrent_buy_in();
+              }
+           }
+
         }
         //Dritte Runde
         if (communityCards.size() == 4) {
+           int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
+
+           if (countMatches > 0) {
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+                 return bet.getCurrent_buy_in();
+              }
+           }
 
         }
         //Vierte Runde
         if (communityCards.size() == 5) {
+           int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
+
+           if (countMatches > 0) {
+              if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+                 return bet.getCurrent_buy_in();
+              }
+           }
 
         }
 
