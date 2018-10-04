@@ -94,23 +94,9 @@ public class Player {
                return bet.getCurrent_buy_in();
             }
          } else if (countMatches == 1) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 20)) {
-                  return minimalBet + 20;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 20);
          } else if (countMatches == 2) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 40)) {
-                  return minimalBet + 40;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 40);
          }
       }
       //Dritte Runde
@@ -132,23 +118,9 @@ public class Player {
                return bet.getCurrent_buy_in();
             }
          } else if (countMatches == 1) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 20)) {
-                  return minimalBet + 20;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 20);
          } else if (countMatches == 2) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 40)) {
-                  return minimalBet + 40;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 40);
          }
       }
       //Vierte Runde
@@ -166,23 +138,9 @@ public class Player {
          }
 
          if (countMatches == 1) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 20)) {
-                  return minimalBet + 20;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 20);
          } else if (countMatches == 2) {
-            if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-
-               if (myPlayer.getStack() >= (minimalBet + 80)) {
-                  return minimalBet + 80;
-               } else {
-                  return bet.getCurrent_buy_in();
-               }
-            }
+            return raise(myPlayer, bet, minimalBet, 80);
          }
       }
 
@@ -250,5 +208,19 @@ public class Player {
       } catch (Exception e) {
          return 0;
       }
+   }
+
+   private static int raise(org.leanpoker.player.model.Player myPlayer, Bet bet, int minimalBet, int amount) {
+      if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
+
+         if (myPlayer.getStack() >= (minimalBet + amount)) {
+            return minimalBet + amount;
+         }
+         else {
+            return bet.getCurrent_buy_in();
+         }
+      }
+
+      return 0;
    }
 }
