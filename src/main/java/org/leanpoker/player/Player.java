@@ -34,21 +34,29 @@ public class Player {
                 return myPlayer.getStack();
             }
             if(cardIndex >= 80){
-                if((minimalBet * 4) < myPlayer.getStack()){
-                    return minimalBet * 4;
+                if(minimalBet < myPlayer.getStack()){
+                    int currentValue = myPlayer.getStack() - minimalBet;
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
                 }
             }
             if(cardIndex >= 70){
-                if((minimalBet * 3) < myPlayer.getStack()){
-                    return minimalBet * 3;
+                if(minimalBet < myPlayer.getStack()){
+                    int currentValue = myPlayer.getStack() - minimalBet;
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
                 }
             }
             if(cardIndex >= 60){
-                if((minimalBet * 2) < myPlayer.getStack()){
-                    return minimalBet * 2;
+                if(minimalBet < myPlayer.getStack()){
+                    int currentValue = myPlayer.getStack() - minimalBet;
+                    if(currentValue > 0){
+                        return minimalBet;
+                    }
                 }
             }
-            return minimalBet;
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
