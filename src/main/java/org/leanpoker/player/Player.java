@@ -219,8 +219,6 @@ public class Player {
          else {
             return bet.getCurrent_buy_in();
          }
-      } else if(myPlayer.getBet() > 0){
-         return myPlayer.getStack();
       }
 
       return 0;
