@@ -79,34 +79,40 @@ public class Player {
 
            int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
-           if (countMatches > 0) {
+           if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
                  return bet.getCurrent_buy_in();
               }
            }
-
+           else if (countMatches == 2) {
+              return myPlayer.getStack();
+           }
         }
         //Dritte Runde
         if (communityCards.size() == 4) {
            int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
-           if (countMatches > 0) {
+           if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
                  return bet.getCurrent_buy_in();
               }
            }
-
+           else if (countMatches == 2) {
+              return myPlayer.getStack();
+           }
         }
         //Vierte Runde
         if (communityCards.size() == 5) {
            int countMatches = CardUtil.countMatchesWithCommunityCards(bet.getCommunity_cards(), myPlayer.getHole_cards());
 
-           if (countMatches > 0) {
+           if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
                  return bet.getCurrent_buy_in();
               }
            }
-
+           else if (countMatches == 2) {
+              return myPlayer.getStack();
+           }
         }
 
         return 0;
