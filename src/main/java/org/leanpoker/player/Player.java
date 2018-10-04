@@ -29,34 +29,7 @@ public class Player {
             if(bigBlind == bet.getCurrent_buy_in()){
                 return minimalBet;
             }
-            //Gehe in der ersten Runde all in, wenn Paar auf der Hand
-            if(cardIndex > 91){
-                return myPlayer.getStack();
-            }
-            if(cardIndex >= 80){
-                if(minimalBet < myPlayer.getStack()){
-                    int currentValue = myPlayer.getStack() - minimalBet;
-                    if(currentValue > 0){
-                        return minimalBet;
-                    }
-                }
-            }
-            if(cardIndex >= 70){
-                if(minimalBet < myPlayer.getStack()){
-                    int currentValue = myPlayer.getStack() - minimalBet;
-                    if(currentValue > 0){
-                        return minimalBet;
-                    }
-                }
-            }
-            if(cardIndex >= 60){
-                if(minimalBet < myPlayer.getStack()){
-                    int currentValue = myPlayer.getStack() - minimalBet;
-                    if(currentValue > 0){
-                        return minimalBet;
-                    }
-                }
-            }
+            return minimalBet;
         }
         //Zweite Runde
         if (communityCards.size() == 3) {
