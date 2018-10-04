@@ -10,10 +10,10 @@ public class Bet {
    private int orbits;
    private int in_action;
    private int dealer;
-   private Card[] communityCards;
+   private Card[] communityCards = new Card[]{};
    private int current_buy_in;
    private int pot;
-   private Player[] players;
+   private Player[] players = new Player[]{};
 
    public String getTournament_id() {
       return tournament_id;

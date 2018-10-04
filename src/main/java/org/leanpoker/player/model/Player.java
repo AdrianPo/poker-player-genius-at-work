@@ -6,7 +6,7 @@ public class Player {
    private int stack;
    private String status;
    private int bet;
-   private Card[] hole_cards;
+   private Card[] hole_cards = new Card[]{};
    private String version;
    private int id;
 
