@@ -86,7 +86,13 @@ public class Player {
            }
            else if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-                 return bet.getCurrent_buy_in();
+
+                 if (myPlayer.getStack() >= (minimalBet + 20)) {
+                    return minimalBet + 20;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
               }
            }
            else if (countMatches == 2) {
@@ -104,7 +110,13 @@ public class Player {
            }
            else if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-                 return bet.getCurrent_buy_in();
+
+                 if (myPlayer.getStack() >= (minimalBet + 20)) {
+                    return minimalBet + 20;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
               }
            }
            else if (countMatches == 2) {
@@ -117,7 +129,13 @@ public class Player {
 
            if (countMatches == 1) {
               if (myPlayer.getStack() >= bet.getCurrent_buy_in()) {
-                 return bet.getCurrent_buy_in();
+
+                 if (myPlayer.getStack() >= (minimalBet + 20)) {
+                    return minimalBet + 20;
+                 }
+                 else {
+                    return bet.getCurrent_buy_in();
+                 }
               }
            }
            else if (countMatches == 2) {
